@@ -1,0 +1,20 @@
+apply plugin: 'java'
+apply plugin: 'jacoco'
+apply plugin: 'application'
+
+
+mainClassName = 'Homepage'
+
+repositories {
+    jcenter()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+}
+jar {
+  manifest {
+    attributes "Main-Class": "$mainClassName"
+  }
+  from { configurations.compile.collect { it.isDirectory() ? it : zipTree(it) } }
+}
